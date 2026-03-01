@@ -1,0 +1,332 @@
+// ─── CSS Variables (Light Mode defaults) ───
+:host {
+  --rte-primary: #1a73e8;
+  --rte-primary-dark: #1557b0;
+  --rte-bg: #ffffff;
+  --rte-toolbar-bg: #fafafa;
+  --rte-dropdown-bg: #ffffff;
+  --rte-input-bg: #ffffff;
+  --rte-border-color: #dadce0;
+  --rte-text: #202124;
+  --rte-text-secondary: #5f6368;
+  --rte-icon-color: #444746;
+  --rte-hover-bg: #f1f3f4;
+  --rte-active-bg: #d2e3fc;
+  --rte-focus-ring: rgba(26, 115, 232, 0.3);
+  --rte-code-bg: #f1f3f4;
+  --rte-blockquote-border: #dadce0;
+  --rte-table-border: #dadce0;
+  --rte-placeholder-color: #9aa0a6;
+
+  display: block;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+// ─── Dark Mode ───
+.rte-dark {
+  --rte-primary: #8ab4f8;
+  --rte-primary-dark: #669df6;
+  --rte-bg: #1e1e1e;
+  --rte-toolbar-bg: #2d2d2d;
+  --rte-dropdown-bg: #2d2d2d;
+  --rte-input-bg: #3c3c3c;
+  --rte-border-color: #444;
+  --rte-text: #e8eaed;
+  --rte-text-secondary: #9aa0a6;
+  --rte-icon-color: #bdc1c6;
+  --rte-hover-bg: #3c3c3c;
+  --rte-active-bg: #394457;
+  --rte-focus-ring: rgba(138, 180, 248, 0.3);
+  --rte-code-bg: #333;
+  --rte-blockquote-border: #555;
+  --rte-table-border: #555;
+  --rte-placeholder-color: #666;
+}
+
+// ─── Container ───
+.rte-container {
+  border: 1px solid var(--rte-border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--rte-bg);
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &.rte-focused {
+    border-color: var(--rte-primary);
+    box-shadow: 0 0 0 2px var(--rte-focus-ring);
+  }
+
+  &.rte-readonly {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+}
+
+// ─── Editor Wrapper ───
+.rte-editor-wrapper {
+  position: relative;
+}
+
+// ─── Editor Content Area ───
+.rte-editor-content {
+  padding: 16px 20px;
+  outline: none;
+  overflow-y: auto;
+  line-height: 1.6;
+  font-size: 14px;
+  color: var(--rte-text);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+  // Placeholder
+  &:empty::before,
+  &:has(> p:only-child > br:only-child)::before {
+    content: attr(data-placeholder);
+    color: var(--rte-placeholder-color);
+    pointer-events: none;
+    position: absolute;
+    top: 16px;
+    left: 20px;
+  }
+
+  // ─── Typography ───
+
+  p {
+    margin: 0 0 8px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 16px 0 8px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--rte-text);
+  }
+
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.5em; }
+  h3 { font-size: 1.17em; }
+  h4 { font-size: 1em; }
+  h5 { font-size: 0.83em; }
+  h6 { font-size: 0.67em; }
+
+  // ─── Inline Code ───
+  code {
+    background: var(--rte-code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.9em;
+    color: #d63384;
+  }
+
+  // ─── Code Block ───
+  pre {
+    background: var(--rte-code-bg);
+    border-radius: 6px;
+    padding: 12px 16px;
+    overflow-x: auto;
+    margin: 8px 0;
+
+    code {
+      background: transparent;
+      padding: 0;
+      color: var(--rte-text);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+  }
+
+  // ─── Blockquote ───
+  blockquote {
+    border-left: 4px solid var(--rte-blockquote-border);
+    margin: 8px 0;
+    padding: 8px 16px;
+    color: var(--rte-text-secondary);
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 0 4px 4px 0;
+  }
+
+  // ─── Lists ───
+  ul, ol {
+    margin: 8px 0;
+    padding-left: 24px;
+
+    li {
+      margin: 4px 0;
+    }
+  }
+
+  // ─── Links ───
+  a {
+    color: var(--rte-primary);
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--rte-primary-dark);
+    }
+  }
+
+  // ─── Horizontal Rule ───
+  hr {
+    border: none;
+    border-top: 1px solid var(--rte-border-color);
+    margin: 16px 0;
+  }
+
+  // ─── Table ───
+  table.rte-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+
+    th, td {
+      border: 1px solid var(--rte-table-border);
+      padding: 8px 12px;
+      text-align: left;
+      vertical-align: top;
+      min-width: 60px;
+    }
+
+    th {
+      background: var(--rte-toolbar-bg);
+      font-weight: 600;
+    }
+
+    tr:hover td {
+      background: rgba(0, 0, 0, 0.02);
+    }
+  }
+
+  // ─── Images ───
+  .rte-image-wrapper {
+    position: relative;
+    display: block;
+    margin: 12px 0;
+    max-width: 100%;
+
+    &[data-alignment="center"],
+    &.rte-image-center {
+      text-align: center;
+    }
+
+    &[data-alignment="left"],
+    &.rte-image-left {
+      text-align: left;
+    }
+
+    &[data-alignment="right"],
+    &.rte-image-right {
+      text-align: right;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+    }
+
+    &.rte-image-selected {
+      img {
+        box-shadow: 0 0 0 3px var(--rte-primary);
+      }
+    }
+
+    // Caption
+    .rte-image-caption {
+      text-align: center;
+      font-size: 13px;
+      color: var(--rte-text-secondary);
+      padding: 6px 8px;
+      margin-top: 4px;
+      border: 1px dashed transparent;
+      border-radius: 4px;
+      transition: border-color 0.2s;
+      outline: none;
+
+      &:empty::before {
+        content: attr(data-placeholder);
+        color: var(--rte-placeholder-color);
+      }
+
+      &:focus {
+        border-color: var(--rte-border-color);
+      }
+    }
+  }
+
+  // ─── Resize Handles ───
+  .rte-resize-handle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--rte-primary);
+    border: 2px solid #fff;
+    border-radius: 50%;
+    z-index: 5;
+  }
+
+  .rte-resize-nw {
+    top: -5px;
+    left: -5px;
+    cursor: nw-resize;
+  }
+
+  .rte-resize-ne {
+    top: -5px;
+    right: -5px;
+    cursor: ne-resize;
+  }
+
+  .rte-resize-sw {
+    bottom: -5px;
+    left: -5px;
+    cursor: sw-resize;
+  }
+
+  .rte-resize-se {
+    bottom: -5px;
+    right: -5px;
+    cursor: se-resize;
+  }
+
+  // ─── Image Toolbar ───
+  .rte-image-toolbar {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 4px;
+    background: var(--rte-bg);
+    border: 1px solid var(--rte-border-color);
+    border-radius: 6px;
+    padding: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    z-index: 5;
+  }
+
+  .rte-image-toolbar-btn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--rte-icon-color);
+
+    &:hover {
+      background: var(--rte-hover-bg);
+    }
+
+    &:last-child {
+      color: #d93025;
+    }
+  }
+}
